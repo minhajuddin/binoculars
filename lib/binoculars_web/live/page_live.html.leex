@@ -1,0 +1,30 @@
+PID: <%= @pid %>
+<form phx-submit="execute" accept-charset="utf-8">
+  <textarea phx-window-keyup="execute" name="query" cols="30" rows="10"></textarea>
+  <input type="submit" value="Execute">
+</form>
+
+<%= if @number_of_rows == 0 do %>
+  <h2>No data found</h2>
+<% else %>
+  <%= @number_of_rows %> rows found
+  <table>
+    <tr>
+    <%= for col <- @columns do %>
+      <th>
+        <%= col %>
+      </th>
+    <% end %>
+    </tr>
+
+    <%= for row <- @rows do %>
+    <tr>
+      <%= for c <- row do %>
+      <td>
+        <%= c %>
+      </td>
+      <% end %>
+    </tr>
+    <% end %>
+  </table>
+<% end %>
