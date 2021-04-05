@@ -4,6 +4,12 @@ defmodule Binoculars.MixProject do
   def project do
     [
       app: :binoculars,
+      name: "Binoculars",
+      description: description(),
+      package: package(),
+      docs: [
+        extras: ~W(README.md)
+      ],
       version: "0.1.0",
       elixir: "~> 1.7",
       elixirc_paths: elixirc_paths(Mix.env()),
@@ -46,7 +52,9 @@ defmodule Binoculars.MixProject do
       {:telemetry_poller, "~> 0.4"},
       {:gettext, "~> 0.11"},
       {:jason, "~> 1.0"},
-      {:plug_cowboy, "~> 2.0"}
+      {:plug_cowboy, "~> 2.0"},
+      {:ex_doc, ">= 0.0.0", only: :dev},
+      {:credo, ">= 0.0.0", only: [:dev, :test]}
     ]
   end
 
@@ -62,6 +70,25 @@ defmodule Binoculars.MixProject do
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
       test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+    ]
+  end
+
+  defp description do
+    """
+    An elixir package that adds ability to query your database through a web UI.
+    """
+  end
+
+  defp package do
+    [
+      description: description(),
+      files: ~w(lib config mix.exs README.md LICENSE),
+      maintainers: ["Khaja Minhajuddin"],
+      licenses: ["MIT"],
+      links: %{
+        "Github" => "http://github.com/minhajuddin/binoculars",
+        "Docs" => "http://hexdocs.pm/binoculars"
+      }
     ]
   end
 end
